@@ -281,6 +281,22 @@ tr:hover td {
 </style>
 </head>
 <body>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const isTelegram = /Telegram/i.test(ua);
+
+    if (isTelegram) {
+        alert("Some features like PDF and Excel export may not work in the Telegram browser. Please open in Chrome or another browser.");
+
+        // Optional: disable problematic buttons
+        const pdfBtn = document.getElementById("pdfBtn");
+        const excelBtn = document.getElementById("excelBtn");
+        if (pdfBtn) pdfBtn.disabled = true;
+        if (excelBtn) excelBtn.disabled = true;
+    }
+});
+</script>
 <div class="container">
     <!-- HEADER -->
     <div class="header">

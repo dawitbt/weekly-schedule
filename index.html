@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ultimate Weekly Schedule</title>
 
 <!-- GOOGLE FONTS -->
@@ -15,59 +16,173 @@
     --day-bg: #e9f0ff;
     --border: #d1d9e6;
     --loc: #2f6cb0;
+    --primary: #4361ee;
+    --secondary: #3a0ca3;
+    --success: #4cc9f0;
+    --warning: #f72585;
+    --danger: #e63946;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .dark {
-    --bg: #1f1f1f;
+    --bg: #121212;
     --text: #f2f2f2;
-    --table-bg: #2a2a2a;
-    --day-bg: #3a3a3a;
-    --border: #555;
+    --table-bg: #1e1e1e;
+    --day-bg: #2d2d2d;
+    --border: #444;
     --loc: #8ab4f8;
+    --primary: #5e72e4;
+    --secondary: #825ee4;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
-    padding: 25px;
+    line-height: 1.6;
+    padding: 16px;
+    transition: all 0.3s ease;
 }
 
-/* Buttons */
-button {
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    gap: 16px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* Button Styles */
+.buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn {
     padding: 10px 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    margin: 3px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#toggleMode { background: #444; color: #fff; }
-#printBtn { background: #0072ff; color: #fff; }
-#excelBtn { background: #28a745; color: #fff; }
-#saveBtn { background: #ff9900; color: #fff; }
-#loadBtn { background: #555; color: #fff; }
-#docxBtn { background: #6f42c1; color: #fff; }
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: 1rem;
+}
+
+#toggleMode { 
+    background: var(--primary); 
+    color: #fff; 
+}
+
+#printBtn { 
+    background: var(--primary); 
+    color: #fff; 
+}
+
+#excelBtn { 
+    background: #28a745; 
+    color: #fff; 
+}
+
+#saveBtn { 
+    background: #ff9900; 
+    color: #fff; 
+}
+
+#loadBtn { 
+    background: #6c757d; 
+    color: #fff; 
+}
+
+#docxBtn { 
+    background: #6f42c1; 
+    color: #fff; 
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 24px;
+    background: var(--table-bg);
+}
 
 table {
     width: 100%;
     border-collapse: collapse;
     background: var(--table-bg);
+    min-width: 600px;
 }
 
 th, td {
     border: 1px solid var(--border);
-    padding: 10px;
+    padding: 12px;
     text-align: center;
+    transition: background-color 0.2s;
+}
+
+th {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .day {
     background: var(--day-bg);
     font-weight: 700;
+    font-size: 1rem;
 }
 
 .members {
     white-space: pre-line;
+    text-align: left;
 }
 
 .loc {
@@ -79,41 +194,154 @@ th, td {
     font-weight: 600;
 }
 
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+    
+    .header-top {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .header h1 {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    
+    .buttons-container {
+        justify-content: center;
+    }
+    
+    .btn {
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+        padding: 12px 8px;
+        font-size: 0.8rem;
+    }
+    
+    th, td {
+        padding: 8px 6px;
+        font-size: 0.85rem;
+    }
+    
+    .day {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        min-width: 100px;
+        padding: 10px 6px;
+        font-size: 0.75rem;
+    }
+    
+    th, td {
+        padding: 6px 4px;
+        font-size: 0.8rem;
+    }
+    
+    .header h1 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Print styles */
 @media print {
-    button { display: none; }
+    button { 
+        display: none; 
+    }
+    
+    .table-container {
+        box-shadow: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+        padding: 0;
+    }
+    
+    .header {
+        display: none;
+    }
+}
+
+/* Animation for table rows */
+tr:hover td {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.dark tr:hover td {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 </style>
 </head>
 <body>
+<div class="container">
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-top">
+            <h1>Ultimate Weekly Schedule</h1>
+            <div class="buttons-container">
+                <button id="toggleMode" class="btn">
+                    <span class="btn-icon">🌙</span> Dark Mode
+                </button>
+                <button id="printBtn" class="btn">
+                    <span class="btn-icon">📄</span> PDF
+                </button>
+                <button id="excelBtn" class="btn">
+                    <span class="btn-icon">📊</span> Excel
+                </button>
+                <button id="docxBtn" class="btn">
+                    <span class="btn-icon">📝</span> DOCX
+                </button>
+                <button id="saveBtn" class="btn">
+                    <span class="btn-icon">💾</span> Save
+                </button>
+                <button id="loadBtn" class="btn">
+                    <span class="btn-icon">📂</span> Load
+                </button>
+            </div>
+        </div>
+    </div>
 
-<!-- BUTTONS -->
-<button id="toggleMode" onclick="toggleDarkMode()">Dark Mode</button>
-<button id="printBtn" onclick="window.print()">PDF</button>
-<button id="excelBtn">Excel</button>
-<button id="docxBtn">DOCX</button>
-<button id="saveBtn">Save JSON</button>
-<button id="loadBtn">Load JSON</button>
-
-<h2>Ultimate Weekly Schedule</h2>
-
-<table id="scheduleTable">
-    <tr>
-        <th>Day</th>
-        <th>Group</th>
-        <th>Members</th>
-        <th>Location</th>
-        <th>Time (morning)</th>
-    </tr>
-</table>
+    <!-- TABLE -->
+    <div class="table-container">
+        <table id="scheduleTable">
+            <tr>
+                <th>Day</th>
+                <th>Group</th>
+                <th>Members</th>
+                <th>Location</th>
+                <th>Time</th>
+            </tr>
+        </table>
+    </div>
+</div>
 
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/docx@8.2.1/build/docx.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@8.2.1/build/docx.umd.js"></script>
+<!-- DOCX library (latest) -->
+<script src="https://cdn.jsdelivr.net/npm/docx@7.5.0/build/index.js"></script>
+
 
 <script>
 // =======================
 // CONFIG DATA
 // =======================
+// Dark Mode toggle
+document.getElementById("toggleMode").onclick = toggleDarkMode;
+
+// PDF print
+document.getElementById("printBtn").onclick = function() {
+    window.print();
+};
 
 const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 
@@ -144,7 +372,7 @@ function loadTable() {
             <th>Group</th>
             <th>Members</th>
             <th>Location</th>
-            <th>Time (morning)</th>
+            <th>Time</th>
         </tr>
     `;
 
@@ -188,39 +416,95 @@ loadTable();
 // =======================
 function toggleDarkMode() {
     document.body.classList.toggle("dark");
+    const toggleBtn = document.getElementById("toggleMode");
+    const icon = toggleBtn.querySelector(".btn-icon");
+    
+    if (document.body.classList.contains("dark")) {
+        icon.textContent = "☀️";
+        toggleBtn.innerHTML = '<span class="btn-icon">☀️</span> Light Mode';
+    } else {
+        icon.textContent = "🌙";
+        toggleBtn.innerHTML = '<span class="btn-icon">🌙</span> Dark Mode';
+    }
 }
 
 // =======================
 // EXCEL EXPORT
-// =======================
-excelBtn.onclick = function() {
+// // =======================
+document.getElementById("excelBtn").onclick = function() {
     const wb = XLSX.utils.table_to_book(table, { sheet: "Weekly Schedule" });
     XLSX.writeFile(wb, "Weekly_Schedule.xlsx");
 };
 
-// =======================
-// DOCX EXPORT (Fixed)
-// =======================
-docxBtn.onclick = function () {
-    const {
-        Document,
-        Packer,
-        Paragraph,
-        Table,
-        TableRow,
-        TableCell
-    } = window.docx;
+// // =======================
+// // DOCX EXPORT (Fixed)
+// // =======================
+// document.getElementById("docxBtn").onclick = function () {
+//     const {
+//         Document,
+//         Packer,
+//         Paragraph,
+//         Table,
+//         TableRow,
+//         TableCell
+//     } = window.docx;
 
-    let rows = [];
+//     let rows = [];
+
+//     for (let r = 0; r < table.rows.length; r++) {
+//         let cells = [];
+//         for (let c = 0; c < table.rows[r].cells.length; c++) {
+//             cells.push(
+//                 new TableCell({
+//                     children: [ new Paragraph(table.rows[r].cells[c].innerText) ]
+//                 })
+//             );
+//         }
+//         rows.push(new TableRow({ children: cells }));
+//     }
+
+//     const doc = new Document({
+//         sections: [{
+//             children: [
+//                 new Paragraph({ text: "Weekly Schedule", heading: "Heading1" }),
+//                 new Table({ rows })
+//             ]
+//         }]
+//     });
+
+//     Packer.toBlob(doc).then(blob => {
+//         let a = document.createElement("a");
+//         a.href = URL.createObjectURL(blob);
+//         a.download = "Weekly_Schedule.docx";
+//         a.click();
+//     });
+// };
+// =======================
+// DOCX EXPORT (Improved)
+// =======================
+document.getElementById("docxBtn").onclick = function () {
+    if (!window.docx) {
+        alert("DOCX library not loaded!");
+        return;
+    }
+
+    const { Document, Packer, Paragraph, Table, TableRow, TableCell } = window.docx;
+
+    const table = document.getElementById("scheduleTable");
+    if (!table) {
+        alert("Table not found!");
+        return;
+    }
+
+    const rows = [];
 
     for (let r = 0; r < table.rows.length; r++) {
-        let cells = [];
+        const cells = [];
         for (let c = 0; c < table.rows[r].cells.length; c++) {
-            cells.push(
-                new TableCell({
-                    children: [ new Paragraph(table.rows[r].cells[c].innerText) ]
-                })
-            );
+            const cellText = table.rows[r].cells[c].innerText || "";
+            cells.push(new TableCell({
+                children: [ new Paragraph({ text: cellText }) ]
+            }));
         }
         rows.push(new TableRow({ children: cells }));
     }
@@ -235,17 +519,23 @@ docxBtn.onclick = function () {
     });
 
     Packer.toBlob(doc).then(blob => {
-        let a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
         a.download = "Weekly_Schedule.docx";
+        document.body.appendChild(a);
         a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url); // clean up memory
+    }).catch(err => {
+        console.error("Error creating DOCX:", err);
     });
 };
 
 // =======================
 // SAVE JSON
 // =======================
-saveBtn.onclick = function () {
+document.getElementById("saveBtn").onclick = function () {
     let data = {};
 
     let rIndex = 1; // skip header row
@@ -269,7 +559,7 @@ saveBtn.onclick = function () {
 // =======================
 // LOAD JSON
 // =======================
-loadBtn.onclick = function () {
+document.getElementById("loadBtn").onclick = function () {
     let input = document.createElement("input");
     input.type = "file";
     input.accept = ".json";

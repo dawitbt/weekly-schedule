@@ -281,7 +281,7 @@ tr:hover td {
 </style>
 </head>
 <body>
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
     const ua = navigator.userAgent || navigator.vendor || window.opera;
     const isTelegram = /Telegram/i.test(ua);
@@ -289,11 +289,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isTelegram) {
         alert("Some features like PDF and Excel export may not work in the Telegram browser. Please open in Chrome or another browser.");
 
-        // Optional: disable problematic buttons
-        const pdfBtn = document.getElementById("pdfBtn");
-        const excelBtn = document.getElementById("excelBtn");
+        // Disable problematic buttons, works for both ID or class
+        const pdfBtn = document.getElementById("printBtn") || document.querySelector(".printBtn");
+        const excelBtn = document.getElementById("excelBtn") || document.querySelector(".excelBtn");
+
         if (pdfBtn) pdfBtn.disabled = true;
         if (excelBtn) excelBtn.disabled = true;
+
+        // Optional: visually indicate disabled state
+        if (pdfBtn) pdfBtn.style.opacity = 0.6;
+        if (excelBtn) excelBtn.style.opacity = 0.6;
     }
 });
 </script>

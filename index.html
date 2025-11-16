@@ -67,33 +67,42 @@ tr:hover td{background-color:rgba(0,0,0,0.03)}
   </div>
 
   <div class="worktile">
-      <h3>የ ጸሎት ሪኢስ</h3>
+      <h3>የጸሎት ርዕስ Ye Tselot Iris</h3>
       <ul>
-          <li style="color: #28a745">See below schedules</li>
+        <li>1)  Igziabher gbi wust yalutn yalamenu lijocchin weym guadegnochachinin asalifo indiseten, wana tikuretachin gbi wust yalu temariwoch inddemehonu kegbi wust yemidinutin igziabheer indichemirilin, libachewn indikeft</li>
+        <li>2)  Gbi wust yalu Christian temariwochin Igziabher betsegaw indiyaberetachew ina  tegidarotochin  alifew Eyesusn memesker menager indichilu</li>
+        <li>3)  Gbi wust beteleyaye menged yemiserawn ye kifat menfes hailatin iyetekawemn yeigziabher menfes Gbiwn leirsu kidsina indiyaderg</li>
+        <li>4) Libachihu lay yemolawn yegil reisochin irs bers share iyetederaregachiw tseliyu</li>
+        <ul>"በጸሎትና በልመናም ሁሉ ዘወትር በመንፈስ ጸልዩ፤ በዚህም አሳብ ስለ ቅዱሳን ሁሉ እየለመናችሁ በመጽናት ሁሉ ትጉ፤"
+ — ወደ ኤፌሶን ሰዎች 6:17 (አማ 1954) 
+
+</ul>
+        <li style="color: #28a745">See below schedules</li>
       </ul>
   </div>
 
   <div class="table-container">
     <table id="scheduleTable">
-      <tr><th>Day</th><th>Group</th><th>Members</th><th>Location</th><th>Time</th></tr>
+      <tr><th>Day</th><th>Group</th><th>Members</th><th>Location</th><th>Time (morning)</th></tr>
     </table>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/docx@8.2.1/build/docx.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@8.2.1/build/docx.umd.js">
+</script>
 
-<script>
-const days=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+<script>const days=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 let defaultMemberData={
-"Monday":[["Bemnet 0915011889","Piniel"],["Abraham 0941428585","Biniam"],["Miretu","Yordanos 3rd yr 0938692337"]],
-"Tuesday":[["Lelise","Maria 0963650837","Biyan"],["Mitiku","Sisay 0975913583"],["Abaduba 0940282603","Mebratu"]],
-"Wednesday":[["Wube 0916209783","Tarekech 0942492938"],["Ribka","Hayu 0935335590"],["Habte 0903994920","Dawit 0985380211"]],
-"Thursday":[["Mahi 0912602707","Tinsae 0931781627"],["Niftalem 0961230890","Jiregna"],["Semere 0938544363","Asahegn"]],
-"Friday":[["Mercy","Saron 0972952052"],["Sala","Mastewal 0955830155"],["Nahom 0907236139","Temesgen 0939070194"]],
-"Saturday":[["Jery 0987868963","Sebontu 0968720938"],["Gaera 0993484369","Hundesa 0918518385"],["Linken 0941432966","Amanuel 0952079638"]],
-"Sunday":[["Mekilt","Ruhama 0903203903"],["Robi 0939395469","Yordanos 0938692337"],["Aben","Melkamu"]]
+"Monday":[["Mekilt","Piniel"],["Abraham","Biniam","Melkamu"],["Miretu","Yordanos 3rd yr"]],
+"Tuesday":[["Lelise","Maria","Biyan"],["Mitiku","Sisay"],["Abaduba","Mebratu"]],
+"Wednesday":[["Wube","Tarekech"],["Ribka","Hayu"],["Habte","Dawit"]],
+"Thursday":[["Mahi","Tinsae"],["Niftalem","Jiregna"],["Semere","Asahegn"]],
+"Friday":[["Mercy","Saron"],["Sala","Mastewal"],["Nahom","Temesgen"]],
+"Saturday":[["Jery","Sebontu"],["Gaera","Hundesa"],["Linken","Amanuel"]],
+"Sunday":[["Bemnet","Ruhama"],["Robi","Yordanos"],["Aben","Dawit"]]
 };
+
 const locations=["🏠 Female Dorm - Stadium","📝 Register - Block 28","🏠 Male Dorm"];
 const timeSlots=["12:00 - 12:40","12:00 - 12:40","12:00 - 12:40"];
 const table=document.getElementById("scheduleTable");
@@ -107,7 +116,7 @@ const admins=[
 let isAdmin=false;
 
 function loadTable(source=defaultMemberData){
-    table.innerHTML=`<tr><th>Day</th><th>Group</th><th>Members</th><th>Location</th><th>Time</th></tr>`;
+    table.innerHTML=`<tr><th>Day</th><th>Group</th><th>Members</th><th>Location</th><th>Time (morning)</th></tr>`;
     days.forEach(day=>{
         const groups=source[day];
         if(!groups) return;
@@ -261,3 +270,4 @@ document.getElementById("docxBtn").onclick=()=>{
 </script>
 </body>
 </html>
+ 

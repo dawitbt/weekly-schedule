@@ -4,600 +4,228 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ultimate Weekly Schedule</title>
-
-<!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root {
-    --bg: #f4f7fa;
-    --text: #222;
-    --table-bg: #ffffff;
-    --day-bg: #e9f0ff;
-    --border: #d1d9e6;
-    --loc: #2f6cb0;
-    --primary: #4361ee;
-    --secondary: #3a0ca3;
-    --success: #4cc9f0;
-    --warning: #f72585;
-    --danger: #e63946;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.dark {
-    --bg: #121212;
-    --text: #f2f2f2;
-    --table-bg: #1e1e1e;
-    --day-bg: #2d2d2d;
-    --border: #444;
-    --loc: #8ab4f8;
-    --primary: #5e72e4;
-    --secondary: #825ee4;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    padding: 16px;
-    transition: all 0.3s ease;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Header Styles */
-.header {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 24px;
-    gap: 16px;
-}
-
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.header h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin: 0;
-}
-
-/* Button Styles */
-.buttons-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-}
-
-.btn {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.btn:active {
-    transform: translateY(0);
-}
-
-.btn-icon {
-    font-size: 1rem;
-}
-
-#toggleMode { 
-    background: var(--primary); 
-    color: #fff; 
-}
-
-#printBtn { 
-    background: var(--primary); 
-    color: #fff; 
-}
-
-#excelBtn { 
-    background: #28a745; 
-    color: #fff; 
-}
-
-#saveBtn { 
-    background: #ff9900; 
-    color: #fff; 
-}
-
-#loadBtn { 
-    background: #6c757d; 
-    color: #fff; 
-}
-
-#docxBtn { 
-    background: #6f42c1; 
-    color: #fff; 
-}
-
-/* Table Styles */
-.table-container {
-    overflow-x: auto;
-    border-radius: 12px;
-    box-shadow: var(--card-shadow);
-    margin-bottom: 24px;
-    background: var(--table-bg);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--table-bg);
-    min-width: 600px;
-}
-
-th, td {
-    border: 1px solid var(--border);
-    padding: 12px;
-    text-align: center;
-    transition: background-color 0.2s;
-}
-
-th {
-    background-color: var(--primary);
-    color: white;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.day {
-    background: var(--day-bg);
-    font-weight: 700;
-    font-size: 1rem;
-}
-
-.members {
-    white-space: pre-line;
-    text-align: left;
-}
-
-.loc {
-    font-weight: 600;
-    color: var(--loc);
-}
-
-.time {
-    font-weight: 600;
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-    body {
-        padding: 12px;
-    }
-    
-    .header-top {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .header h1 {
-        text-align: center;
-        font-size: 1.5rem;
-    }
-    
-    .buttons-container {
-        justify-content: center;
-    }
-    
-    .btn {
-        flex: 1;
-        min-width: 120px;
-        justify-content: center;
-        padding: 12px 8px;
-        font-size: 0.8rem;
-    }
-    
-    th, td {
-        padding: 8px 6px;
-        font-size: 0.85rem;
-    }
-    
-    .day {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .btn {
-        min-width: 100px;
-        padding: 10px 6px;
-        font-size: 0.75rem;
-    }
-    
-    th, td {
-        padding: 6px 4px;
-        font-size: 0.8rem;
-    }
-    
-    .header h1 {
-        font-size: 1.3rem;
-    }
-}
-
-/* Print styles */
-@media print {
-    button { 
-        display: none; 
-    }
-    
-    .table-container {
-        box-shadow: none;
-    }
-    
-    body {
-        background: white;
-        color: black;
-        padding: 0;
-    }
-    
-    .header {
-        display: none;
-    }
-}
-
-/* Animation for table rows */
-tr:hover td {
-    background-color: rgba(0, 0, 0, 0.03);
-}
-
-.dark tr:hover td {
-    background-color: rgba(255, 255, 255, 0.05);
-}
+:root{--bg:#f4f7fa;--text:#222;--table-bg:#fff;--day-bg:#e9f0ff;--border:#d1d9e6;--loc:#2f6cb0;--primary:#4361ee;--secondary:#3a0ca3;--card-shadow:0 4px 12px rgba(0,0,0,0.08);}
+.dark{--bg:#121212;--text:#f2f2f2;--table-bg:#1e1e1e;--day-bg:#2d2d2d;--border:#444;--loc:#8ab4f8;--primary:#5e72e4;--secondary:#825ee4;--card-shadow:0 4px 12px rgba(0,0,0,0.3);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:16px;transition:all 0.3s ease;}
+.container{max-width:1200px;margin:0 auto;}
+.header{display:flex;flex-direction:column;margin-bottom:24px;gap:16px;}
+.header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.header h1{font-size:1.75rem;font-weight:700;color:var(--primary);margin:0;}
+.header-message{font-size:0.95rem;color:var(--secondary);font-weight:600;}
+.buttons-container{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.btn{padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.875rem;transition:all 0.2s ease;display:flex;align-items:center;gap:6px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.15);}
+.btn:active{transform:translateY(0);}
+.btn-icon{font-size:1rem;}
+#toggleMode,#printBtn{background:var(--primary);color:#fff;}
+#excelBtn{background:#28a745;color:#fff;}
+#saveBtn{background:#ff9900;color:#fff;}
+#loadBtn{background:#6c757d;color:#fff;}
+#docxBtn{background:#6f42c1;color:#fff;}
+#adminBtn{background:#ff5722;color:#fff;}
+.table-container{overflow-x:auto;border-radius:12px;box-shadow:var(--card-shadow);margin-bottom:24px;background:var(--table-bg);}
+table{width:100%;border-collapse:collapse;background:var(--table-bg);min-width:600px;}
+th,td{border:1px solid var(--border);padding:12px;text-align:center;transition:background-color 0.2s;}
+th{background-color:var(--primary);color:white;font-weight:600;font-size:0.9rem;}
+.day{background:var(--day-bg);font-weight:700;font-size:1rem;}
+.members{white-space:pre-line;text-align:left;}
+.loc{font-weight:600;color:var(--loc);}
+.time{font-weight:600;}
+@media(max-width:768px){body{padding:12px}.header-top{flex-direction:column;align-items:stretch}.header h1{text-align:center;font-size:1.5rem}.buttons-container{justify-content:center}.btn{flex:1;min-width:120px;justify-content:center;padding:12px 8px;font-size:0.8rem}th,td{padding:8px 6px;font-size:0.85rem}.day{font-size:0.9rem}}
+@media(max-width:480px){.btn{min-width:100px;padding:10px 6px;font-size:0.75rem}th,td{padding:6px 4px;font-size:0.8rem}.header h1{font-size:1.3rem}}
+@media print{button{display:none}.table-container{box-shadow:none}body{background:white;color:black;padding:0}.header{display:none}}
+tr:hover td{background-color:rgba(0,0,0,0.03)}
+.dark tr:hover td{background-color:rgba(255,255,255,0.05)}
 </style>
 </head>
 <body>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    const isTelegram = /Telegram/i.test(ua);
-
-    if (isTelegram) {
-        alert("Some features like PDF and Excel export may not work in the Telegram browser. Please open in Chrome or another browser.");
-
-        // Disable problematic buttons, works for both ID or class
-        const pdfBtn = document.getElementById("printBtn") || document.querySelector(".printBtn");
-        const excelBtn = document.getElementById("excelBtn") || document.querySelector(".excelBtn");
-
-        if (pdfBtn) pdfBtn.disabled = true;
-        if (excelBtn) excelBtn.disabled = true;
-
-        // Optional: visually indicate disabled state
-        if (pdfBtn) pdfBtn.style.opacity = 0.6;
-        if (excelBtn) excelBtn.style.opacity = 0.6;
-    }
-});
-</script>
 <div class="container">
-    <!-- HEADER -->
-    <div class="header">
-        <div class="header-top">
-            <h1>Ultimate Weekly Schedule</h1>
-            <div class="buttons-container">
-                <button id="toggleMode" class="btn">
-                    <span class="btn-icon">🌙</span> Dark Mode
-                </button>
-                <button id="printBtn" class="btn">
-                    <span class="btn-icon">📄</span> PDF
-                </button>
-                <button id="excelBtn" class="btn">
-                    <span class="btn-icon">📊</span> Excel
-                </button>
-                <button id="docxBtn" class="btn">
-                    <span class="btn-icon">📝</span> DOCX
-                </button>
-                <button id="saveBtn" class="btn">
-                    <span class="btn-icon">💾</span> Save
-                </button>
-                <button id="loadBtn" class="btn">
-                    <span class="btn-icon">📂</span> Load
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- TABLE -->
-    <div class="table-container">
-        <table id="scheduleTable">
-            <tr>
-                <th>Day</th>
-                <th>Group</th>
-                <th>Members</th>
-                <th>Location</th>
-                <th>Time (morning)</th>
-            </tr>
-        </table>
-    </div>
+<div class="header">
+<div class="header-top">
+<h1>Ultimate Weekly Schedule</h1>
+<div class="header-message" id="headerMessage"></div>
+<div class="buttons-container">
+<button id="toggleMode" class="btn"><span class="btn-icon">🌙</span> Dark Mode</button>
+<button id="printBtn" class="btn"><span class="btn-icon">📄</span> PDF</button>
+<button id="excelBtn" class="btn"><span class="btn-icon">📊</span> Excel</button>
+<button id="docxBtn" class="btn"><span class="btn-icon">📝</span> DOCX</button>
+<button id="saveBtn" class="btn">💾 Save</button>
+<button id="loadBtn" class="btn">📂 Load</button>
+<button id="adminBtn" class="btn">🔑 Admin Login</button>
+</div>
+</div>
 </div>
 
-<!-- SCRIPTS -->
+<div class="table-container">
+<table id="scheduleTable">
+<tr><th>Day</th><th>Group</th><th>Members</th><th>Location</th><th>Time</th></tr>
+</table>
+</div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/docx@8.2.1/build/docx.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/docx@8.2.1/build/docx.umd.js"></script>
-<!-- DOCX library (latest) -->
-<script src="https://cdn.jsdelivr.net/npm/docx@7.5.0/build/index.js"></script>
-
 
 <script>
-// =======================
-// CONFIG DATA
-// =======================
-// Dark Mode toggle
-document.getElementById("toggleMode").onclick = toggleDarkMode;
-
-// PDF print
-document.getElementById("printBtn").onclick = function() {
-    window.print();
+// ===== DATA =====
+const days=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+let memberData={
+"Monday":[["Bemnet 0915011889","Piniel"],["Abraham 0941428585","Biniam"],["Miretu","Yordanos 0938692337"]],
+"Tuesday":[["Lelise","Maria 0963650837","Biyan"],["Mitiku","Sisay 0975913583"],["Abaduba 0940282603","Mebratu"]],
+"Wednesday":[["Wube 0916209783","Tarekech 0942492938"],["Ribka","Hayu 0935335590"],["Habte 0903994920","Dawit 0985380211"]],
+"Thursday":[["Mahi 0912602707","Tinsae 0931781627"],["Niftalem 0961230890","Jiregna"],["Semere 0938544363","Asahegn"]],
+"Friday":[["Mercy","Saron 0972952052"],["Sala","Mastewal 0955830155"],["Nahom 0907236139","Temesgen 0939070194"]],
+"Saturday":[["Jery 0987868963","Sebontu 0968720938"],["Gaera 0993484369","Hundesa 0918518385"],["Linken 0941432966","Amanuel 0952079638"]],
+"Sunday":[["Mekilt","Ruhama 0903203903"],["Robi 0939395469","Yordanos 0938692337"],["Aben","Melkamu"]]
 };
+const locations=["🏠 Female Dorm","📝 Register Block 28","🏠 Male Dorm"];
+const timeSlots=["12:00 - 12:40","12:00 - 12:40","12:00 - 12:40"];
+const table=document.getElementById("scheduleTable");
 
-const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+// ===== ADMINS =====
+const admins=[
+{name:"Admin1",password:"pass1"},
+{name:"Admin2",password:"pass2"},
+{name:"Admin3",password:"pass3"},
+{name:"Admin4",password:"pass4"},
+{name:"Admin5",password:"pass5"}
+];
+let isAdmin=false;
 
-let memberData = {
-    "Monday": [["Bemnet 0915011889","Piniel"], ["Abraham 0941428585","Biniam"], ["Miretu","Yordanos 0938692337"]],
-    "Tuesday": [["Lelise","Maria 0963650837","Biyan"], ["Mitiku","Sisay 0975913583"], ["Abaduba 0940282603","Mebratu"]],
-    "Wednesday": [["Wube 0916209783","Tarekech 0942492938"], ["Ribka","Hayu 0935335590"], ["Habte 0903994920","Dawit 0985380211"]],
-    "Thursday": [["Mahi 0912602707","Tinsae 0931781627"], ["Niftalem 0961230890","Jiregna"], ["Semere 0938544363","Asahegn"]],
-    "Friday": [["Mercy","Saron 0972952052"], ["Sala","Mastewal 0955830155"], ["Nahom 0907236139","Temesgen 0939070194"]],
-    "Saturday": [["Jery 0987868963","Sebontu 0968720938"], ["Gaera 0993484369","Hundesa 0918518385"], ["Linken 0941432966","Amanuel 0952079638"]],
-    "Sunday": [["Mekilt","Ruhama 0903203903"], ["Robi 0939395469","Yordanos 0938692337"], ["Aben","Melkamu"]]
-};
-
-const locations = ["🏠 Female Dorm", "📝 Register Block 28", "🏠 Male Dorm"];
-const timeSlots = ["12:00 - 12:40", "12:00 - 12:40", "12:00 - 12:40"];
-
-const table = document.getElementById("scheduleTable");
-
-// =======================
-// GENERATE TABLE
-// =======================
-
-function loadTable() {
-    // Clear old rows except header
-    table.innerHTML = `
-        <tr>
-            <th>Day</th>
-            <th>Group</th>
-            <th>Members</th>
-            <th>Location</th>
-            <th>Time (morning)</th>
-        </tr>
-    `;
-
-    days.forEach(day => {
-        const groups = memberData[day];
-        groups.forEach((members, g) => {
-            const row = table.insertRow(-1);
-
-            if (g === 0) {
-                const d = row.insertCell(0);
-                d.rowSpan = groups.length;
-                d.className = "day";
-                d.innerText = day;
+// ===== LOAD TABLE =====
+function loadTable(source=memberData){
+    table.innerHTML=`<tr><th>Day</th><th>Group</th><th>Members</th><th>Location</th><th>Time</th></tr>`;
+    days.forEach(day=>{
+        const groups=source[day];
+        groups.forEach((grp,idx)=>{
+            let row=table.insertRow(-1);
+            if(idx===0){
+                let dayCell=row.insertCell(0);
+                dayCell.rowSpan=groups.length;
+                dayCell.className="day";
+                dayCell.innerText=day;
             }
+            row.insertCell(-1).innerText=idx+1;
+            let memberCell=row.insertCell(-1);
+            memberCell.className="members";
+            memberCell.innerHTML=grp.join("\n");
+            let locCell=row.insertCell(-1);
+            locCell.className="loc";
+            locCell.innerText=locations[idx];
+            let timeCell=row.insertCell(-1);
+            timeCell.className="time";
+            timeCell.innerText=timeSlots[idx];
+        });
+    });
+    applyEditable();
+}
 
-            let cellGroup = row.insertCell(-1);
-            cellGroup.innerText = g + 1;
-
-            let cellMembers = row.insertCell(-1);
-            cellMembers.contentEditable = "true";
-            cellMembers.className = "members";
-            cellMembers.innerHTML = members.join("\n");
-
-            let cellLoc = row.insertCell(-1);
-            cellLoc.contentEditable = "true";
-            cellLoc.className = "loc";
-            cellLoc.innerText = locations[g];
-
-            let cellTime = row.insertCell(-1);
-            cellTime.contentEditable = "true";
-            cellTime.className = "time";
-            cellTime.innerText = timeSlots[g];
+// ===== MAKE EDITABLE =====
+function applyEditable(){
+    table.querySelectorAll("tr").forEach((row,i)=>{
+        if(i===0) return;
+        row.querySelectorAll(".members,.loc,.time").forEach(cell=>{
+            cell.contentEditable=isAdmin;
         });
     });
 }
 
-loadTable();
+// ===== ADMIN LOGIN =====
+document.getElementById("adminBtn").onclick=()=>{
+    const password=prompt("Enter admin password:");
+    const admin=admins.find(a=>a.password===password);
+    if(admin){
+        isAdmin=true;
+        sessionStorage.setItem("isAdmin","true");
+        sessionStorage.setItem("adminName",admin.name);
+        document.getElementById("headerMessage").innerText=`Welcome ${admin.name}`;
+        applyEditable();
+        alert(`Welcome ${admin.name}, you can now edit all cells!`);
+    }else{
+        alert("Incorrect password. Table remains read-only.");
+    }
+};
 
-// =======================
-// DARK MODE
-// =======================
-function toggleDarkMode() {
+// ===== CHECK SESSION =====
+window.onload=()=>{
+    if(sessionStorage.getItem("isAdmin")==="true"){
+        isAdmin=true;
+        document.getElementById("headerMessage").innerText=`Welcome ${sessionStorage.getItem("adminName")}`;
+    }
+    loadTable(JSON.parse(localStorage.getItem("weeklySchedule"))||memberData);
+};
+
+// ===== SAVE =====
+document.getElementById("saveBtn").onclick=()=>{
+    if(!isAdmin){ alert("Only admins can save!"); return; }
+    const data={};
+    let rowIndex=1;
+    days.forEach(day=>{
+        data[day]=[];
+        for(let i=0;i<3;i++){
+            const row=table.rows[rowIndex];
+            const members=row.cells[2].innerText.split("\n").filter(x=>x.trim()!=="");
+            const location=row.cells[3].innerText.trim();
+            const time=row.cells[4].innerText.trim();
+            data[day].push({members,location,time});
+            rowIndex++;
+        }
+    });
+    localStorage.setItem("weeklySchedule",JSON.stringify(data));
+    alert("Schedule saved!");
+};
+
+// ===== LOAD =====
+document.getElementById("loadBtn").onclick=()=>{
+    if(!isAdmin){ alert("Only admins can load!"); return; }
+    const data=JSON.parse(localStorage.getItem("weeklySchedule"));
+    if(data) loadTable(data);
+    else alert("No saved schedule found.");
+};
+
+// ===== DARK MODE =====
+document.getElementById("toggleMode").onclick=()=>{
     document.body.classList.toggle("dark");
-    const toggleBtn = document.getElementById("toggleMode");
-    const icon = toggleBtn.querySelector(".btn-icon");
-    
-    if (document.body.classList.contains("dark")) {
-        icon.textContent = "☀️";
-        toggleBtn.innerHTML = '<span class="btn-icon">☀️</span> Light Mode';
+    const toggleBtn=document.getElementById("toggleMode");
+    const icon=toggleBtn.querySelector(".btn-icon");
+    if(document.body.classList.contains("dark")){
+        toggleBtn.innerHTML='<span class="btn-icon">☀️</span> Light Mode';
     } else {
-        icon.textContent = "🌙";
-        toggleBtn.innerHTML = '<span class="btn-icon">🌙</span> Dark Mode';
+        toggleBtn.innerHTML='<span class="btn-icon">🌙</span> Dark Mode';
     }
-}
-
-// =======================
-// EXCEL EXPORT
-// // =======================
-document.getElementById("excelBtn").onclick = function() {
-    const wb = XLSX.utils.table_to_book(table, { sheet: "Weekly Schedule" });
-    XLSX.writeFile(wb, "Weekly_Schedule.xlsx");
 };
 
-// // =======================
-// // DOCX EXPORT (Fixed)
-// // =======================
-// document.getElementById("docxBtn").onclick = function () {
-//     const {
-//         Document,
-//         Packer,
-//         Paragraph,
-//         Table,
-//         TableRow,
-//         TableCell
-//     } = window.docx;
+// ===== PRINT =====
+document.getElementById("printBtn").onclick=()=>window.print();
 
-//     let rows = [];
+// ===== EXCEL =====
+document.getElementById("excelBtn").onclick=()=>{
+    const wb=XLSX.utils.table_to_book(table,{sheet:"Weekly Schedule"});
+    XLSX.writeFile(wb,"Weekly_Schedule.xlsx");
+};
 
-//     for (let r = 0; r < table.rows.length; r++) {
-//         let cells = [];
-//         for (let c = 0; c < table.rows[r].cells.length; c++) {
-//             cells.push(
-//                 new TableCell({
-//                     children: [ new Paragraph(table.rows[r].cells[c].innerText) ]
-//                 })
-//             );
-//         }
-//         rows.push(new TableRow({ children: cells }));
-//     }
-
-//     const doc = new Document({
-//         sections: [{
-//             children: [
-//                 new Paragraph({ text: "Weekly Schedule", heading: "Heading1" }),
-//                 new Table({ rows })
-//             ]
-//         }]
-//     });
-
-//     Packer.toBlob(doc).then(blob => {
-//         let a = document.createElement("a");
-//         a.href = URL.createObjectURL(blob);
-//         a.download = "Weekly_Schedule.docx";
-//         a.click();
-//     });
-// };
-// =======================
-// DOCX EXPORT (Improved)
-// =======================
-document.getElementById("docxBtn").onclick = function () {
-    if (!window.docx) {
-        alert("DOCX library not loaded!");
-        return;
-    }
-
-    const { Document, Packer, Paragraph, Table, TableRow, TableCell } = window.docx;
-
-    const table = document.getElementById("scheduleTable");
-    if (!table) {
-        alert("Table not found!");
-        return;
-    }
-
-    const rows = [];
-
-    for (let r = 0; r < table.rows.length; r++) {
-        const cells = [];
-        for (let c = 0; c < table.rows[r].cells.length; c++) {
-            const cellText = table.rows[r].cells[c].innerText || "";
-            cells.push(new TableCell({
-                children: [ new Paragraph({ text: cellText }) ]
-            }));
+// ===== DOCX =====
+document.getElementById("docxBtn").onclick=()=>{
+    if(!window.docx){ alert("DOCX library not loaded!"); return; }
+    const {Document,Packer,Paragraph,Table,TableRow,TableCell}=window.docx;
+    const rows=[];
+    for(let r=0;r<table.rows.length;r++){
+        const cells=[];
+        for(let c=0;c<table.rows[r].cells.length;c++){
+            cells.push(new TableCell({children:[new Paragraph({text:table.rows[r].cells[c].innerText})]}));
         }
-        rows.push(new TableRow({ children: cells }));
+        rows.push(new TableRow({children:cells}));
     }
-
-    const doc = new Document({
-        sections: [{
-            children: [
-                new Paragraph({ text: "Weekly Schedule", heading: "Heading1" }),
-                new Table({ rows })
-            ]
-        }]
+    const doc=new Document({sections:[{children:[new Paragraph({text:"Weekly Schedule",heading:"Heading1"}),new Table({rows})]}]});
+    Packer.toBlob(doc).then(blob=>{
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement("a");
+        a.href=url;a.download="Weekly_Schedule.docx";document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
     });
-
-    Packer.toBlob(doc).then(blob => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Weekly_Schedule.docx";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url); // clean up memory
-    }).catch(err => {
-        console.error("Error creating DOCX:", err);
-    });
-};
-
-// =======================
-// SAVE JSON
-// =======================
-document.getElementById("saveBtn").onclick = function () {
-    let data = {};
-
-    let rIndex = 1; // skip header row
-    days.forEach(day => {
-        data[day] = [];
-        for (let g = 0; g < 3; g++) {
-            let cols = table.rows[rIndex].cells;
-            let members = cols[2].innerText.split("\n").filter(x => x.trim() !== "");
-            data[day].push(members);
-            rIndex++;
-        }
-    });
-
-    let blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-    let a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "schedule_backup.json";
-    a.click();
-};
-
-// =======================
-// LOAD JSON
-// =======================
-document.getElementById("loadBtn").onclick = function () {
-    let input = document.createElement("input");
-    input.type = "file";
-    input.accept = ".json";
-
-    input.onchange = e => {
-        let file = e.target.files[0];
-        let reader = new FileReader();
-        reader.onload = evt => {
-            memberData = JSON.parse(evt.target.result);
-            loadTable();
-        };
-        reader.readAsText(file);
-    };
-
-    input.click();
 };
 </script>
-
 </body>
 </html>
